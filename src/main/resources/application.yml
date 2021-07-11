@@ -1,0 +1,42 @@
+
+# 配置 debug 模式是否开启
+debug: false
+
+server:
+  port: 9001
+  compression:
+    enabled: true
+    min-response-size: 1
+  forward-headers-strategy: FRAMEWORK
+
+# 配置数据源及 JPA
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.0.107:3306/mybatis-demo?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: NON_NULL
+    time-zone: GMT+8
+  redis:
+    host: 192.168.0.107
+    timeout: 5000
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-idle: 500
+        min-idle: 20
+        max-active: 2000
+        max-wait: 5000
+  mvc:
+    format:
+      date: yyyy-MM-dd HH:mm:ss
+  aop:
+    proxy-target-class: true
