@@ -128,6 +128,24 @@ public class BizController {
         return ResponseModel.ok("修改成功");
     }
 
+    // TODO 获取所有优惠券 TicketController -> GET /ticket/all
+    @GetMapping("/tickets")
+    public ResponseModel getTickets(@RequestParam String token, String id,
+                                    Date endTime, Integer pageNum,
+                                    Integer pageSize, String sortField, String sortOrder) {
+        HttpHeaders getTicketsHeader = getAuthenticationHeader(token);
+        HttpEntity<HttpHeaders> httpEntity = new HttpEntity<>(getTicketsHeader);
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("id", id);
+        valueMap.put("endTime", endTime);
+        valueMap.put("pageNum", pageNum);
+        valueMap.put("pageSize", pageSize);
+        valueMap.put("sortField", sortField);
+        valueMap.put("sortOrder", sortOrder);
+        ResponseEntity<Object> result = restTemplate.exchange(API_URL + "/ticket/all", HttpMethod.GET, httpEntity, Object.class, valueMap);
+        return ResponseModel.ok(result.getBody());
+    }
+
     // TODO 获取指定 ID 优惠券 TicketController -> GET /ticket
     // 查询参数 id
     @GetMapping("/ticket")

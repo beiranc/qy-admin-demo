@@ -22,4 +22,6 @@ public class LoginResponseData {
     private LoginResponseUser user;
 
     private Set<String> roles;
+
+    private Set<String> permissions;
 }
